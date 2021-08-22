@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, OrderedDict, Set, Union
 
@@ -47,12 +48,10 @@ class Graph:
         buckets = DFS(white=list(self.storage.keys()))
         while buckets.white:
             current = buckets.white.pop()
-            print(f'find_circles: {current}')
             self.dfs(current, buckets)
         return buckets.circles
 
     def dfs(self, current: VertexNameType, buckets: DFS, parent: VertexNameType = None):
-        print(f'DFS: current={current} parent={parent}')
         buckets.gray.add(current)
         childs = self.storage[current]
         buckets.travel[parent] = current
@@ -62,7 +61,6 @@ class Graph:
             if child in buckets.black:
                 continue  # already visited, nothing to do
             elif child in buckets.gray:  # already visiting - circle detected
-                # print (f'Found circle {child}' )
                 circle = {current: child}
                 next = child
                 while next != current:
@@ -97,7 +95,7 @@ def main(argv: Optional[List[str]] = None) -> None:
     if args.graphviz:
         print(graph.dump_graphviz())
     else:
-        print(f'Input: {graph.storage}')
+        print(f'Input: {graph.dump()}')
         print(f'Circles: {graph.find_circles()}')
 
 
