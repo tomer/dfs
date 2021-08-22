@@ -15,6 +15,12 @@ optional arguments:
                         -Tsvg | display`
 ```
 
+**Graphical visualization** of the graph is provided by graphviz, and can be displayed using the command below if the `graphviz` and `imagemagick` packages are installed.
+
+```
+$ ./graph.py --input graph.json --graphviz | graphviz -Tsvg | display
+```
+
 ## Tests
 
 This repository provides tests created for the Pytest testing framework.
